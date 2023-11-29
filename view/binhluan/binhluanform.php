@@ -17,8 +17,12 @@ $dsbl = loadall_binhluan($idpro);
     <link rel="stylesheet" href="../css/styke.css">
     <style>
         .binhluan table {
-            width: 90%;
-            margin-left: 5%;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 4rem;
+            background-color: transparent;
+            font-size: 20px;
         }
 
         .binhluan table td:nth-child(1) {
@@ -39,8 +43,8 @@ $dsbl = loadall_binhluan($idpro);
 
 
 
-    <div class="row mb">
-        <div class="boxtitle">BÌNH LUẬN</div>
+    <div class="row1 mb">
+        <div class="boxtitle3">BÌNH LUẬN</div>
         <div class="boxcontent2 binhluan">
             <table>
                 <?php

@@ -55,9 +55,9 @@
 					<div class="side-bar p-sm-4 p-3">
 						<div class="search-hotel border-bottom py-2">
 							<h3 class="agileits-sear-head mb-3">Tìm kiếm</h3>
-							<form action="#" method="post">
-								<input type="search" placeholder="Sản phẩm..." name="search" required="">
-								<input type="submit" value=" ">
+							<form action="index.php?act=sanpham" method="post">
+								<input type="search" placeholder="Sản phẩm..." name="kyw" required="">
+								<input type="submit" name="timkiem" value=" ">
 							</form>
 						</div>
 						<!-- price -->
@@ -108,12 +108,6 @@
 								?>
 								<li>
 							</ul>
-						</div>
-						<div class="boxfooter searbox">
-							<form action="index.php?act=sanpham" method="post">
-								<input type="text" name="kyw">
-								<input type="submit" name="timkiem" value="Tìm Kiếm">
-							</form>
 						</div>
 						<!-- //electronics -->
 

@@ -21,5 +21,6 @@
                 <li><a href="index.php?act=dskh">Khách Hàng</a></li>
                 <li><a href="index.php?act=dsbl">Bình Luận</a></li>
                 <li><a href="index.php?act=thongke">Thống Kê</a></li>
+                <li><a href="index.php?act=listbill">Quản lý đơn hàng</a></li>
             </ul>
         </div>

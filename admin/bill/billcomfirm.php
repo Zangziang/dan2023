@@ -1,12 +1,6 @@
 <div class="row">
     <div class="row mb">
         <div class="boxtrai mr">
-            <div class="row mb">
-                <div class="boxtitle">Cảm ơn</div>
-                <div class="row boxcontent" style="text-align: center">
-                    <h2>Cảm ơn quý khách dã đặt hàng!!</h2>
-                </div>
-            </div>
             <?php
             if (isset($bill) && (is_array($bill))) {
                 extract($bill);

@@ -46,6 +46,7 @@
 	include "moder/danhmuc.php";
 	include "moder/sanpham.php";
 	include "moder/taikhoan.php";
+	include "moder/cart.php";
 	include "view/header.php";
 	include "global.php";
 
@@ -161,13 +162,51 @@
 				break;
 
 			case 'delcart':
-				if(isset($_GET['idcart'])){
-					array_splice($_SESSION['mycart'],$_GET['idcart'],1);
-				}else{
-					$_SESSION['mycart']=[];
+				if (isset($_GET['idcart'])) {
+					array_splice($_SESSION['mycart'], $_GET['idcart'], 1);
+				} else {
+					$_SESSION['mycart'] = [];
 				}
 
-				header('location: index.php?act=viewcart');
+				include "view/cart/viewcart.php";
+
+				break;
+
+			case 'bill':
+				include "view/cart/bill.php";
+				break;
+
+			case 'billcomfirm':
+
+				if (isset($_POST['dongydathang']) && ($_POST['dongydathang'])) {
+					if(isset($_SESSION['user'])) $iduser=$_SESSION['user']['id'];
+					else $id=0;
+					$name = $_POST['name'];
+					$address = $_POST['address'];
+					$email = $_POST['email'];
+					$tel = $_POST['tel'];
+					$pttt = $_POST['pttt'];
+					$ngaydathang = date('h:i:sa d/m/Y');
+					$tongdonhang = tongdonhang();
+					// tao bill
+					$idbill = insert_bill($iduser,$name, $email, $address, $tel, $pttt, $ngaydathang,$tongdonhang);
+
+					//insert into cart: $session['mycart'] & idbill
+					foreach ($_SESSION['mycart'] as $cart) {
+						insert_cart($_SESSION['user']['id'], $cart[0], $cart[2], $cart[1], $cart[3], $cart[4], $cart[5], $idbill);
+					}
+
+					//xoa session
+					$_SESSION['cart'] = [];
+				}
+				$bill = loadone_bill($idbill);
+				$billct = loadall_cart($idbill);
+				include "view/cart/billcomfirm.php";
+				break;
+
+			case 'mybill':
+				$listbill=loadall_bill($_SESSION['user']['id']);
+				include "view/cart/mybill.php";
 				break;
 
 			case 'gioithieu':

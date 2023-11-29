@@ -1,42 +1,13 @@
-<div class="row mb">
+<div class="row1 mb">
      <div class="boxtrai mr">
         <div class="row mb">
 
-            <div class="boxtitle">Giỏ Hàng</div>
-            <div class="row boxcontent cart">
+        <div style="width: 108px; color: #FFF8F8; font-size: 24px; font-family: Inter; font-weight: 700; word-wrap: break-word ; margin-top: 20px ">Giỏ Hàng </div>
+            <div class="row boxcontent1 cart">
+                
                 <table>
-                    <tr>
-                        <th>Hình</th>
-                        <th>Sản Phẩm</th>
-                        <th>Đơn Giá </th>
-                        <th>Số Lượng</th>
-                        <th>Thành Tiền</th>
-                        <th>Thao tác</th>
-                    </tr>
-
                     <?php
-                        $tong=0;
-                        $i=0;
-                        foreach ($_SESSION['mycart'] as $cart) {
-                            $hinh=$img_path.$cart[2];
-                            $ttien=$cart[3]*$cart[4];
-                            $tong+=$ttien;
-                            $xoasp='<a href="index.php?act=delcart&idcart='.$i.'"><input type="button" value="xóa"></a>';
-                            echo '<tr>
-                                    <td><img src="'.$hinh.'" alt="" height="80px"></td>
-                                    <td>'.$cart[1].'</td>
-                                    <td>'.$cart[3].'</td>
-                                    <td>'.$cart[4].'</td>
-                                    <td>'.$ttien.'</td>
-                                    <td>'.$xoasp.'</td>
-                                </tr>';
-                                $i+=1;
-                        }
-                        echo'<tr>
-                                <td colspan="4">Tổng đơn hàng</td>
-                                <td>'.$tong.'</td>
-                                <td></td>
-                            </tr>';
+                    viewcart(1);
                     ?>
                     <!-- <tr>
                         <td>1</td>
@@ -60,7 +31,8 @@
             </div>
         </div>
         <div class="row mb bill">
-            <input type="submit" value="Đồng Ý Đặt Hàng"><a href="index.php?act=delcart"><input type="button" value="Xóa Giỏ Hàng"></a>
+        <a href="index.php?act=bill"><input type="button" value=" Tiếp tục đặt hàng"></a>
+        <a href="index.php?act=delcart"><input type="button" value="Xóa giỏ hàng"></a>
         </div>
      </div>
 </div>

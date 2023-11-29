@@ -5,6 +5,7 @@ include "../moder/sanpham.php";
 include "../moder/taikhoan.php";
 include "../moder/binhluan.php";
 include "../moder/thongke.php";
+include "../moder/cart.php";
 include "header.php";
 //controller
 
@@ -155,6 +156,50 @@ if (isset($_GET['act'])) {
             $listthongke = loadall_thongke();
             include "thongke/bieudo.php";
             break;
+
+        case 'listbill':
+            if (isset($_POST['kyw']) && ($_POST['kyw'] != "")) {
+                $kyw = $_POST['kyw'];
+            } else {
+                $kyw = "";
+            }
+            $listbill = loadall_bill($kyw, 0);
+            include "bill/listbill.php";
+            break;
+        case 'billcomfirm':
+            $idbill = 0; // Khai báo biến $idbill ở đây
+
+            if (isset($_POST['dongydathang']) && ($_POST['dongydathang'])) {
+                if (isset($_SESSION['user'])) {
+                    $iduser = $_SESSION['user']['id'];
+                } else {
+                    $iduser = 0;
+                }
+                $name = $_POST['name'];
+                $address = $_POST['address'];
+                $email = $_POST['email'];
+                $tel = $_POST['tel'];
+                $pttt = $_POST['pttt'];
+                $ngaydathang = date('h:i:sa d/m/Y');
+                $tongdonhang = tongdonhang();
+                // tạo hóa đơn
+                $idbill = insert_bill($iduser, $name, $email, $address, $tel, $pttt, $ngaydathang, $tongdonhang);
+
+                // thêm vào giỏ hàng: $_SESSION['mycart'] & idbill
+                foreach ($_SESSION['mycart'] as $cart) {
+                    insert_cart($iduser, $cart[0], $cart[2], $cart[1], $cart[3], $cart[4], $cart[5], $idbill);
+                }
+
+                // xóa session
+                $_SESSION['cart'] = [];
+            }
+
+            $bill = loadone_bill($idbill);
+            $billct = loadall_cart($idbill);
+            include "../admin/bill/billcomfirm.php";
+            break;
+
+
         default:
             include "home.php";
             break;
